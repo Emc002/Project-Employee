@@ -1,0 +1,19 @@
+{
+  "name": "project-employee",
+  "version": "1.0.0",
+  "description": "Create, Read, Update, and Delete data Employee",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Alif Nafis Alghany",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
