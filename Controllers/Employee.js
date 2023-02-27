@@ -6,7 +6,7 @@ const employeePack = {
   getAllEmployee: asyncWrapper(async (req, res) => {
     const employee = await Employee.find({})
     if (!employee) {
-      return res.status(404).json({ messages: `No Employee Data` })
+      return next(createCustomError(`No Employee Data`, 404))
     }
     res.status(200).json({ employee })
   }),
@@ -15,7 +15,7 @@ const employeePack = {
     const ID = req.params.id
     const employee = await Employee.findOne({ _id: ID })
     if (!employee) {
-      return res.status(404).json({ messages: `No Employee with ID : ${ID}` })
+      return next(createCustomError(`No Employee with ID : ${ID}`, 404))
     }
     res.json({ employee })
   }),
