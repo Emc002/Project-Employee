@@ -3,7 +3,10 @@ const router = express.Router()
 
 const employeePack = require('../Controllers/Employee')
 
-router.route('/').get(employeePack.getAllEmployee).post(employeePack.createEmployee)
-router.route('/:id').get(employeePack.getOneEmployee).patch(employeePack.updateEmployee).delete(employeePack.deleteEmployee)
+router.get('/getAll', employeePack.getAllEmployee)
+router.get('/getOne/:id', employeePack.getOneEmployee)
+router.post('/create',employeePack.createEmployee)
+router.put('/update/:id',employeePack.updateEmployee)
+router.delete('/delete/:id', employeePack.deleteEmployee)
 
 module.exports = router;

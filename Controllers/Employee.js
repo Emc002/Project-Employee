@@ -1,28 +1,30 @@
 const Employee = require('../Models/Employee')
 const asyncWrapper = require('../Middleware/async')
-const { createCustomError } = require('../Errors/customError')
+const { StatusCodes } = require('http-status-codes')
+const { NotFoundError } = require('../Errors')
 
 const employeePack = {
   getAllEmployee: asyncWrapper(async (req, res) => {
     const employee = await Employee.find({})
     if (!employee) {
-      return next(createCustomError(`No Employee Data`, 404))
+      throw new NotFoundError(`No Employee Data`, 404)
     }
-    res.status(200).json({ employee })
+    res.status(StatusCodes.OK).json({ message: "Get All Success", employee })
   }),
 
   getOneEmployee: asyncWrapper(async (req, res) => {
     const ID = req.params.id
     const employee = await Employee.findOne({ _id: ID })
-    if (!employee) {
-      return next(createCustomError(`No Employee with ID : ${ID}`, 404))
+    if (employee == null) {
+      console.log("not catch")
+      throw new NotFoundError(`No Employee with ID : ${ID}`, 404)
     }
-    res.json({ employee })
+    res.status(StatusCodes.OK).json({ message: "Get One Success", employee })
   }),
 
   createEmployee: asyncWrapper(async (req, res) => {
     const employee = await Employee.create(req.body)
-    res.status(201).json({ employee })
+    res.status(StatusCodes.CREATED).json({ message: "Create Success", employee })
   }),
 
   updateEmployee: asyncWrapper(async (req, res) => {
@@ -32,18 +34,18 @@ const employeePack = {
       runValidators: true
     })
     if (!employee) {
-      return next(createCustomError(`No Employee with ID : ${ID}`, 404))
+      throw new NotFoundError(`No Employee with ID : ${ID}`, 404)
     }
-    res.status(200).json({ employee })
+    res.status(StatusCodes.OK).json({ message: "Update Success", employee })
   }),
 
   deleteEmployee: asyncWrapper(async (req, res) => {
     const ID = req.params.id;
     const employee = await Employee.findOneAndDelete({ _id: ID })
     if (!employee) {
-      return next(createCustomError(`No Employee with ID : ${ID}`, 404))
+      throw new NotFoundError(`No Employee with ID : ${ID}`, 404)
     }
-    res.json({ employee })
+    res.status(StatusCodes.OK).json({ message: "Delete Success" })
   })
 }
 

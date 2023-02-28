@@ -10,7 +10,7 @@ app.use('/api/employee',employee);
 app.use(notFound);
 app.use(errorHandleMiddleware);
 
-const port = 3000
+const port = process.env.PORT || 3001
 
 const starting = async () =>{
   try{
