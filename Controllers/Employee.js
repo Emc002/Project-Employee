@@ -3,7 +3,6 @@ const asyncWrapper = require('../Middleware/async')
 const { StatusCodes } = require('http-status-codes')
 const { NotFoundError } = require('../Errors')
 const { default: mongoose } = require('mongoose');
-require('dotenv').config();
 
 const employeePack = {
   getAllEmployee: asyncWrapper(async (req, res) => {
@@ -23,9 +22,7 @@ const employeePack = {
     res.status(StatusCodes.OK).json({ message: "Get One Success", employee })
   }),
 
-  createEmployee: asyncWrapper(async (req, res) => {
-     await mongoose.disconnect(process.env.DB_CONNECTION)
-    
+  createEmployee: asyncWrapper(async (req, res) => {    
     const employee = await Employee.create(req.body)
     res.status(StatusCodes.CREATED).json({ message: "Create Success", employee })
   }),
