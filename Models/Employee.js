@@ -11,7 +11,7 @@ const EmployeeSchema = new mongoose.Schema({
     type: String,
     required: [true, `must provide email`],
     unique: true,
-    validate:{
+    validate: {
       validator: function (v) {
         return /^\S+@\S+\.\S+$/.test(v);
       },
@@ -23,12 +23,12 @@ const EmployeeSchema = new mongoose.Schema({
     required: [true, `must provide phone`],
     unique: true,
     validate:
-      {
-        validator: function (v) {
-          return /^(\d{1,13}|\d{0})$/.test(v);
-        },
-        message:`Your Phone Number must have at most 13 digits!`
+    {
+      validator: function (v) {
+        return /^(\d{1,13}|\d{0})$/.test(v);
       },
+      message: `Your Phone Number must have at most 13 digits!`
+    },
   },
   address: {
     type: String,
