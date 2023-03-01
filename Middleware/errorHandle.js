@@ -21,15 +21,12 @@ const errorHandleMiddleware = (err, req, res, next) => {
   else if (err.code === 11000) {
     let message = Object.keys(err.keyValue)[0];
     message += " Already Exist"
-    return res.status(400).json({ message, err });
+    return res.status(400).json({ message });
   }
 
   else if (err.name === 'MongoNotConnectedError') {
     const message = 'Server Not Connected';
-    const message1 = err.name
-    const message2 = err.code
-
-    return res.status(500).json({ message, message1, err });
+    return res.status(500).json({ message });
   }
   return res.status(500).json({ message: 'Something went wrong, please try again' });
 };
