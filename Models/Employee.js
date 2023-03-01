@@ -22,6 +22,7 @@ const EmployeeSchema = new mongoose.Schema({
     type: Number,
     required: [true, `must provide phone`],
     unique: true,
+    match: [/^[0-9]+$/, 'Please enter a valid phone number'],
     validate:
     {
       validator: function (v) {
