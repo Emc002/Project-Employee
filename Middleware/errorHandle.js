@@ -11,7 +11,7 @@ const errorHandleMiddleware = (err, req, res, next) => {
       }
     }
     const message = err.name
-    return res.status(400).json({ errors, message });
+    return res.status(422).json({ errors, message });
   }
 
   else if (err.statusCode === 404) {
@@ -21,7 +21,7 @@ const errorHandleMiddleware = (err, req, res, next) => {
 
   else if (err.name === 'CastError') {
     const message = 'Invalid ID';
-    return res.status(400).json({ message });
+    return res.status(422).json({ message });
   }
 
   else if (err.code === 11000) {
