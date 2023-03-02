@@ -80,30 +80,3 @@ const ProjectClientSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('ProjectClient', ProjectClientSchema )
-
-
-// {
-//   "code": "Opp001",
-//   "client_code": "C001",
-//   "pic_email": "budi@masadepan.com",
-//   "opportunity_name": "Front End & Back End Developer",
-//   "description": "developer untuk project di client",
-//   "sales_email": "angga.wibowo@idstar.group",
-//   "status": "warm",
-//   "last_modified": "2023-02-07 10:11:12",
-//   "resources": [
-//       {
-//           "qty": 3,
-//           "position": "front end",
-//           "level": "junior",
-//           "project_duration": 6
-//       },
-//       {
-//           "qty": 1,
-//           "position": "front end",
-//           "level": "senior",
-//           "ctc": 12000000,
-//           "project_duration": 10
-//       }
-//   ]
-// }
