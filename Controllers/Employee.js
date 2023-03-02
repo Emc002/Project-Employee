@@ -2,7 +2,7 @@ const Employee = require('../Models/Employee')
 const asyncWrapper = require('../Middleware/async')
 const { StatusCodes } = require('http-status-codes')
 const { NotFoundError } = require('../Errors')
-const { default: mongoose } = require('mongoose');
+// const { default: mongoose } = require('mongoose');
 
 const employeePack = {
   getAllEmployee: asyncWrapper(async (req, res) => {
