@@ -1,7 +1,8 @@
 const errorHandleMiddleware = (err, req, res, next) => {
   if (err.name === 'ValidationError') {
     const errors = {};
-    for (let field in err.errors) {
+    for (let field in err.errors) { 
+
       if(err.errors[field].name == "CastError")
       {
         errors[field] = `You must enter a valid ${err.errors[field].path}`;
@@ -10,8 +11,22 @@ const errorHandleMiddleware = (err, req, res, next) => {
         errors[field] = err.errors[field].message;
       }
     }
+    const resources = [];
+    for (let field in errors) {
+      if (/.+\./.test(field)) {
+        const [index, nestedField] = field.split('.').slice(1);
+        if (!resources[index]) {
+          resources[index] = {};
+        }
+        resources[index][nestedField] = errors[field];
+        delete errors[field];
+      }
+    }
     const message = err.name
-    return res.status(422).json({ errors, message });
+    if(resources.length === 0 ){
+      return res.status(422).json({ errors, message});
+    }
+    return res.status(422).json({ errors: { ...errors, resources }, message});
   }
 
   else if (err.statusCode === 404) {
