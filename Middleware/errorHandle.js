@@ -11,7 +11,7 @@ const errorHandleMiddleware = (err, req, res, next) => {
         errors[field] = err.errors[field].message;
       }
     }
-    const resources = [];
+    const resources=[];
     for (let field in errors) {
       if (/.+\./.test(field)) {
         const [index, nestedField] = field.split('.').slice(1);
@@ -22,6 +22,8 @@ const errorHandleMiddleware = (err, req, res, next) => {
         delete errors[field];
       }
     }
+    let stringA ="mi.fta.alif.farah"
+    console.log(stringA.split('.').slice(1))
     const message = err.name
     if(resources.length === 0 ){
       return res.status(422).json({ errors, message});
