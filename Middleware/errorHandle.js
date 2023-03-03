@@ -11,7 +11,6 @@ const errorHandleMiddleware = (err, req, res, next) => {
         errors[field] = err.errors[field].message;
       }
     }
-    console.log("test")
     const resources=[];
     for (let field in errors) {
       if (/.+\./.test(field)) {
